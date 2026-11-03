@@ -1,0 +1,21 @@
+{
+  "name": "creditfirst",
+  "displayName": "CreditFirst - Max credit first, paid key second",
+  "version": "0.1.0",
+  "description": "Set up API keys from your own Claude Max plan's monthly API credit, hand keys over without exposing them in the conversation, and optionally deploy your own hub that uses credit accounts first (nearest renewal first) and your paid key only when credit is short. Not affiliated with Anthropic.",
+  "author": {
+    "name": "CreditFirst contributors"
+  },
+  "homepage": "https://github.com/elon-choo/creditfirst",
+  "repository": "https://github.com/elon-choo/creditfirst",
+  "license": "MIT",
+  "keywords": [
+    "api-credit",
+    "max-plan",
+    "proxy",
+    "self-hosted",
+    "api-keys",
+    "vercel",
+    "anthropic-messages-api"
+  ]
+}

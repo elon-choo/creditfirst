@@ -1,0 +1,16 @@
+{
+  "name": "creditfirst",
+  "owner": {
+    "name": "CreditFirst contributors"
+  },
+  "description": "CreditFirst - use the API credit that comes with your own Claude Max plan first, with your paid key only as a fallback. Not affiliated with Anthropic.",
+  "plugins": [
+    {
+      "name": "creditfirst",
+      "source": "./",
+      "version": "0.1.0",
+      "description": "Claude Code walks you through putting your Max plan's monthly API credit on a Console organization, creating a key, handing the key over safely, and - if you have several accounts or a paid service key - deploying your own self-hosted hub that spends credit first and the paid key only when credit is short.",
+      "keywords": ["api-credit", "max-plan", "proxy", "self-hosted", "api-keys", "vercel"]
+    }
+  ]
+}
