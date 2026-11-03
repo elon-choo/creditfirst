@@ -58,14 +58,14 @@ section .sub{color:var(--muted);margin:0 0 24px}
 
 /* install */
 .cmd{display:flex;align-items:center;gap:10px;background:var(--code-bg);color:var(--code-text);border-radius:10px;padding:12px 12px 12px 16px;margin:10px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px}
-.cmd code{flex:1;overflow-x:auto;white-space:nowrap}
+.cmd code{flex:1;min-width:0;overflow-x:auto;white-space:nowrap}
 .copy{flex:none;border:0;border-radius:8px;background:var(--credit);color:#fff;font:inherit;font-family:"Pretendard Variable",Pretendard,sans-serif;font-size:14px;font-weight:700;padding:8px 14px;cursor:pointer}
 .copy:focus-visible,.choice button:focus-visible,summary:focus-visible{outline:3px solid var(--paid);outline-offset:2px}
 .say{background:var(--credit-soft);border-left:5px solid var(--credit);border-radius:0 10px 10px 0;padding:16px 18px;font-size:19px;font-weight:700;margin:12px 0}
 
 /* steps */
 .steps{display:grid;gap:14px;counter-reset:s}
-.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 20px 20px 72px;position:relative}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 20px 20px 72px;position:relative;min-width:0}
 .step::before{counter-increment:s;content:counter(s);position:absolute;left:20px;top:18px;width:36px;height:36px;border-radius:50%;background:var(--ink-btn);color:var(--ink-btn-text);display:grid;place-items:center;font-weight:800}
 .step h3{margin:0 0 6px;font-size:19px}
 .step p{margin:0;color:var(--muted)}
