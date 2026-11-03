@@ -8,6 +8,8 @@
 
 [한국어 README](README.ko.md)
 
+**Easy guide (Korean): https://elon-choo.github.io/creditfirst/**
+
 ## Who it is for
 
 - You pay for a Claude Max plan and want its monthly API credit to power your own scripts or apps.

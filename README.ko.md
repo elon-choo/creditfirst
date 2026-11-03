@@ -6,6 +6,8 @@
 - Max 계정이 여러 개이거나 서비스에 유료 키를 쓰고 있으면, **내 것인** 작은 허브(내 Vercel, 내 데이터베이스)를 띄워 크레딧부터, 초기화가 가까운 계정부터 쓰게 합니다.
 - 오픈소스(MIT)입니다. **Anthropic과 관계없는 프로젝트입니다.**
 
+**쉬운 사용 가이드: https://elon-choo.github.io/creditfirst/**
+
 [English README](README.md)
 
 ## 누구에게 맞나요

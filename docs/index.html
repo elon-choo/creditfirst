@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CreditFirst 사용 가이드</title>
+<meta name="description" content="Claude Max 구독에 들어 있는 API 크레딧을 먼저 쓰고, 모자랄 때만 유료 키를 쓰게 해 주는 Claude Code 플러그인. 설치 두 줄, 말 한마디로 시작합니다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#f4f6f3; --surface:#ffffff; --ink:#15201b; --muted:#56635c; --line:#dde3de;
+  --credit:#1f8a5b; --credit-soft:#e2f3ea; --paid:#c2571b; --paid-soft:#fbe9dd;
+  --ink-btn:#15201b; --ink-btn-text:#ffffff; --code-bg:#15201b; --code-text:#e8f1ec;
+  --warn:#9a6a00; --warn-soft:#fdf3d6;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1512; --surface:#18211c; --ink:#e7eee9; --muted:#9aa8a0; --line:#2a352f;
+    --credit:#4cc38a; --credit-soft:#16342a; --paid:#f08a4b; --paid-soft:#3a2416;
+    --ink-btn:#e7eee9; --ink-btn-text:#0f1512; --code-bg:#0a0f0c; --code-text:#d6e6dc;
+    --warn:#f0c14b; --warn-soft:#33290f;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:17px;line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:var(--credit)}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.brand{font-weight:800;letter-spacing:-.02em;font-size:19px}
+.brand span{color:var(--credit)}
+.top nav a{color:var(--muted);text-decoration:none;font-size:15px;margin-left:16px}
+.top nav a:hover{color:var(--ink)}
+
+/* hero */
+.hero{padding:40px 0 28px}
+.hero h1{font-size:clamp(30px,6vw,48px);line-height:1.25;letter-spacing:-.03em;margin:0 0 18px;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--credit)}
+.hero p.lead{font-size:clamp(17px,2.6vw,20px);color:var(--muted);margin:0 0 28px;max-width:640px}
+
+/* signature: two wallets */
+.wallets{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin:8px 0 8px}
+.wallets .row{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;margin:10px 0}
+.wallets .name{font-size:14px;font-weight:700}
+.bar{height:26px;border-radius:6px;background:var(--line);overflow:hidden;position:relative}
+.bar i{position:absolute;inset:0 auto 0 0;display:block;border-radius:6px}
+.bar.c i{background:var(--credit);width:100%;animation:drain 7s ease-in-out infinite}
+.bar.p i{background:var(--paid);width:100%;animation:paid 7s ease-in-out infinite}
+@keyframes drain{0%,10%{width:100%}55%,80%{width:0%}100%{width:100%}}
+@keyframes paid{0%,55%{width:100%}80%{width:78%}100%{width:100%}}
+@media (prefers-reduced-motion: reduce){.bar.c i{animation:none;width:35%}.bar.p i{animation:none}}
+.wallets small{display:block;color:var(--muted);font-size:14px;margin-top:6px}
+
+/* sections */
+section{padding:44px 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(24px,4vw,30px);letter-spacing:-.02em;margin:0 0 8px;line-height:1.35}
+section .sub{color:var(--muted);margin:0 0 24px}
+
+/* install */
+.cmd{display:flex;align-items:center;gap:10px;background:var(--code-bg);color:var(--code-text);border-radius:10px;padding:12px 12px 12px 16px;margin:10px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px}
+.cmd code{flex:1;overflow-x:auto;white-space:nowrap}
+.copy{flex:none;border:0;border-radius:8px;background:var(--credit);color:#fff;font:inherit;font-family:"Pretendard Variable",Pretendard,sans-serif;font-size:14px;font-weight:700;padding:8px 14px;cursor:pointer}
+.copy:focus-visible,.choice button:focus-visible,summary:focus-visible{outline:3px solid var(--paid);outline-offset:2px}
+.say{background:var(--credit-soft);border-left:5px solid var(--credit);border-radius:0 10px 10px 0;padding:16px 18px;font-size:19px;font-weight:700;margin:12px 0}
+
+/* steps */
+.steps{display:grid;gap:14px;counter-reset:s}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 20px 20px 72px;position:relative}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:20px;top:18px;width:36px;height:36px;border-radius:50%;background:var(--ink-btn);color:var(--ink-btn-text);display:grid;place-items:center;font-weight:800}
+.step h3{margin:0 0 6px;font-size:19px}
+.step p{margin:0;color:var(--muted)}
+
+/* chooser */
+.chooser{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
+.q{margin:0 0 18px}
+.q b{display:block;margin-bottom:10px}
+.choice{display:flex;flex-wrap:wrap;gap:10px}
+.choice button{border:2px solid var(--line);background:transparent;color:var(--ink);border-radius:10px;padding:10px 18px;font:inherit;font-weight:700;cursor:pointer;min-height:44px}
+.choice button[aria-pressed="true"]{border-color:var(--credit);background:var(--credit-soft)}
+.result{border-radius:12px;padding:18px;margin-top:6px;display:none}
+.result.show{display:block}
+.result.a{background:var(--credit-soft)}
+.result.b{background:var(--paid-soft)}
+.result h3{margin:0 0 6px;font-size:20px}
+.result ul{margin:8px 0 0;padding-left:20px}
+
+/* key handoff */
+.keys{display:grid;gap:14px}
+@media (min-width:760px){.keys{grid-template-columns:repeat(3,1fr)}}
+.safety{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--credit) 0%,var(--credit) 60%,var(--warn) 100%);margin:0 0 6px}
+.safety-l{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:16px}
+.key{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.key .tag{display:inline-block;font-size:13px;font-weight:800;border-radius:6px;padding:2px 10px;margin-bottom:8px}
+.key.k1 .tag{background:var(--credit-soft);color:var(--credit)}
+.key.k2 .tag{background:var(--credit-soft);color:var(--credit)}
+.key.k3 .tag{background:var(--warn-soft);color:var(--warn)}
+.key h3{margin:0 0 6px;font-size:19px}
+.key p{margin:0;color:var(--muted)}
+
+/* chat */
+.chat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px}
+.msg{max-width:88%;padding:12px 14px;border-radius:12px;font-size:16px}
+.msg.me{justify-self:end;background:var(--ink-btn);color:var(--ink-btn-text);border-bottom-right-radius:4px}
+.msg.ai{justify-self:start;background:var(--bg);border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg .who{display:block;font-size:12px;font-weight:700;opacity:.7;margin-bottom:2px}
+
+/* checklist & table */
+.check{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.check li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px 12px 44px;position:relative}
+.check li::before{content:"";position:absolute;left:14px;top:16px;width:18px;height:18px;border:2px solid var(--credit);border-radius:4px}
+.check li small{display:block;color:var(--muted);font-size:14px}
+.only{font-size:13px;font-weight:800;color:var(--paid)}
+table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:12px;overflow:hidden;border:1px solid var(--line);font-size:15px}
+th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--bg);font-size:14px}
+.tablewrap{overflow-x:auto}
+
+/* faq */
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 18px;margin:10px 0}
+summary{cursor:pointer;font-weight:700;padding:16px 0;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--muted);font-weight:400}
+details[open] summary::after{content:"−"}
+details p{margin:0 0 16px;color:var(--muted)}
+
+footer{padding:36px 0 60px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+@media (max-width:560px){
+  body{font-size:16px}
+  .wallets .row{grid-template-columns:84px 1fr}
+  .step{padding:18px 16px 18px 64px}
+  .step::before{left:16px}
+  .top nav a:not(.gh){display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">Credit<span>First</span></div>
+    <nav>
+      <a href="#start">시작하기</a>
+      <a href="#which">나는 어느 쪽?</a>
+      <a href="#faq">자주 묻는 질문</a>
+      <a class="gh" href="https://github.com/elon-choo/creditfirst">GitHub</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>Max 요금에 이미 들어 있는<br><em>API 크레딧</em>, 그냥 버리고 계셨나요?</h1>
+    <p class="lead">Claude Max를 쓰면 매달 API 크레딧이 같이 나와요. CreditFirst는 이 크레딧으로 API 키를 만들고, 내 앱에 안전하게 넣는 일까지 Claude Code가 대신 해 주게 합니다. 크레딧이 모자랄 때만 원래 쓰던 유료 키로 넘어가요.</p>
+    <div class="wallets" aria-label="크레딧을 먼저 쓰고, 모자랄 때만 유료 키를 쓰는 모습">
+      <div class="row"><span class="name" style="color:var(--credit)">① Max 크레딧</span><div class="bar c"><i></i></div></div>
+      <div class="row"><span class="name" style="color:var(--paid)">② 유료 키</span><div class="bar p"><i></i></div></div>
+      <small>요청이 오면 크레딧부터 씁니다. 크레딧이 바닥났을 때만 유료 키에서 돈이 나가요.</small>
+    </div>
+  </div>
+
+  <section id="start">
+    <h2>시작은 세 단계면 끝나요</h2>
+    <p class="sub">개발을 몰라도 괜찮아요. Claude가 묻는 말에 답하기만 하면 됩니다.</p>
+    <div class="steps">
+      <div class="step">
+        <h3>Claude Code에 두 줄을 붙여 넣으세요</h3>
+        <p>한 줄씩 복사해서 Claude Code 입력창에 넣고 엔터를 누릅니다.</p>
+        <div class="cmd"><code>/plugin marketplace add elon-choo/creditfirst</code><button class="copy" data-copy="/plugin marketplace add elon-choo/creditfirst">복사</button></div>
+        <div class="cmd"><code>/plugin install creditfirst@creditfirst</code><button class="copy" data-copy="/plugin install creditfirst@creditfirst">복사</button></div>
+      </div>
+      <div class="step">
+        <h3>이렇게 말하세요</h3>
+        <div class="say">“Max 크레딧으로 API 키 만들어줘”</div>
+        <p>또는 <code>/creditfirst:setup</code>을 입력해도 됩니다.</p>
+      </div>
+      <div class="step">
+        <h3>질문 세 개에 답하세요</h3>
+        <p>Max 계정이 몇 개인지, 이미 돌아가는 서비스가 유료 API 키를 쓰는지, 키를 넣을 프로젝트 폴더가 어디인지 묻습니다. 그다음은 Claude가 한 단계씩 같이 갑니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="which">
+    <h2>나는 어느 쪽일까요?</h2>
+    <p class="sub">두 가지만 눌러 보세요. 무엇이 만들어지는지, 얼마나 걸리는지 바로 보여 드려요.</p>
+    <div class="chooser">
+      <div class="q"><b>내가(또는 우리 회사가) 돈 내고 쓰는 Max 계정은?</b>
+        <div class="choice" data-q="acct"><button type="button" aria-pressed="false" data-v="1">1개</button><button type="button" aria-pressed="false" data-v="many">여러 개</button></div>
+      </div>
+      <div class="q"><b>이미 배포한 서비스가 유료 Claude API 키를 쓰고 있나요?</b>
+        <div class="choice" data-q="paid"><button type="button" aria-pressed="false" data-v="no">아니요</button><button type="button" aria-pressed="false" data-v="yes">네</button></div>
+      </div>
+      <div class="result a" id="resA" role="status">
+        <h3>허브 없이 끝나요 · 약 10분 · 추가 비용 없음</h3>
+        <p>Max 크레딧으로 만든 키를 내 프로젝트의 <code>.env</code> 파일에 넣으면 끝입니다.</p>
+        <ul>
+          <li>크레딧이 떨어지면 돈이 나가지 않고 요청이 멈춰요. 다음 달 크레딧이 들어오면 다시 됩니다.</li>
+          <li>준비물: Claude Code, Node 20 이상, 가입 7일이 지난 Max 구독</li>
+        </ul>
+      </div>
+      <div class="result b" id="resB" role="status">
+        <h3>나만의 허브를 만들어요 · 약 30~60분</h3>
+        <p>내 Vercel에 작은 중계 서버(허브)를 띄웁니다. 앱은 허브 주소 하나만 바라보고, 허브가 알아서 순서를 정해요.</p>
+        <ul>
+          <li>Max 크레딧부터 씁니다. 계정이 여러 개면 크레딧이 곧 초기화되는 계정부터 써요.</li>
+          <li>크레딧이 모자랄 때만 유료 키로 넘어갑니다. 한 달 상한(<code>HUB_PAID_MONTHLY_CAP_USD</code>)을 걸어 두길 권해요.</li>
+          <li>절대 유료로 넘어가면 안 되는 앱은 “크레딧 전용” 키를 받을 수 있어요.</li>
+          <li>준비물: 위의 것 + Vercel 계정, 무료 Neon 데이터베이스(설치 중에 만들어 드려요)</li>
+          <li>비용: Neon 무료. Vercel 무료(Hobby)는 개인·비상업 용도만 돼요. 회사 서비스용이면 Vercel Pro가 필요합니다.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="keys">
+    <h2>키를 넘기는 방법은 세 가지예요</h2>
+    <p class="sub">키는 돈과 같아요. Claude는 키를 만들기 전에 어떤 방법으로 받을지 먼저 묻고, 마지막 ‘만들기’와 ‘복사’ 버튼은 내가 직접 누릅니다.</p>
+    <div class="safety" aria-hidden="true"></div><div class="safety-l" aria-hidden="true"><span>더 안전</span><span>덜 안전</span></div>
+    <div class="keys">
+      <div class="key k1"><span class="tag">가장 안전 · 추천</span>
+        <h3>내가 직접 붙여 넣기</h3>
+        <p>키를 복사해서 내 손으로 <code>.env</code> 파일에 붙여 넣어요. 허브를 쓰면 허브의 관리 화면(<code>/admin</code>)에 붙여 넣습니다. Claude는 키를 한 번도 보지 않아요.</p>
+      </div>
+      <div class="key k2"><span class="tag">쉽고 안전</span>
+        <h3>복사만 하고 Claude에게 맡기기</h3>
+        <p>키를 복사만 해 두면, Claude가 클립보드에서 바로 파일로 옮겨 넣어요. 키는 화면에 나오지 않고 끝 4글자만 보여 줍니다.</p>
+      </div>
+      <div class="key k3"><span class="tag">주의 · 꼭 원할 때만</span>
+        <h3>Claude가 직접 키를 읽기</h3>
+        <p>이 방법은 키가 Claude Code 대화 기록 파일에 그대로 남아요. 그래도 원하시면 Claude가 해 드리고, 끝난 뒤 키를 새로 바꾸라고 알려 드립니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="example">
+    <h2>실제 대화는 이런 느낌이에요</h2>
+    <p class="sub">말투와 순서는 상황에 따라 조금씩 다를 수 있어요.</p>
+    <div class="chat">
+      <div class="msg me"><span class="who">나</span>Max 크레딧으로 API 키 만들어줘</div>
+      <div class="msg ai"><span class="who">Claude</span>좋아요. 세 가지만 여쭤볼게요. ① Max 계정이 몇 개인가요? ② 이미 배포한 서비스가 유료 API 키를 쓰나요? ③ 키를 쓸 프로젝트 폴더는 어디인가요?</div>
+      <div class="msg me"><span class="who">나</span>1개, 아니요, ~/my-app</div>
+      <div class="msg ai"><span class="who">Claude</span>그럼 허브 없이 10분이면 끝나요. Console(API 키를 관리하는 Anthropic 사이트)에 로그인해 주시면, 크레딧을 받는 화면까지 같이 갈게요. 구매나 카드 등록 버튼은 절대 누르지 않아요.</div>
+      <div class="msg ai"><span class="who">Claude</span>키를 만들기 전에 받는 방법을 골라 주세요. 1번 직접 붙여 넣기(가장 안전), 2번 복사만 하고 저에게 맡기기, 3번 제가 직접 읽기(대화 기록에 남아요).</div>
+      <div class="msg me"><span class="who">나</span>2번</div>
+      <div class="msg ai"><span class="who">Claude</span>~/my-app/.env 에 넣었어요(끝 4글자 ••••a1F3). 아주 작은 요청으로 연결을 시험했더니 잘 돼요.</div>
+    </div>
+  </section>
+
+  <section id="ready">
+    <h2>시작 전에 확인할 것</h2>
+    <p class="sub">없는 게 있어도 괜찮아요. Claude가 설치 방법을 알려 드려요.</p>
+    <ul class="check">
+      <li>Claude Code<small>이 가이드의 주인공이에요.</small></li>
+      <li>Node 20 이상<small>터미널에서 <code>node --version</code>으로 확인. 없으면 nodejs.org에서 설치.</small></li>
+      <li>가입한 지 7일이 지난 Claude Max 구독<small>7일이 지나야 Console에 API 크레딧 받기 버튼이 나와요.</small></li>
+      <li><span class="only">허브를 만들 때만</span> Vercel 계정<small><code>npm i -g vercel</code>로 설치하고 <code>vercel login</code>으로 로그인.</small></li>
+      <li><span class="only">허브를 만들 때만</span> Neon 데이터베이스(무료)<small>설치 스크립트가 Vercel 연동으로 만들어 주거나, 주소를 복사해 넣으면 돼요.</small></li>
+    </ul>
+  </section>
+
+  <section id="cost">
+    <h2>비용과 시간 한눈에</h2>
+    <div class="tablewrap">
+    <table>
+      <tr><th></th><th>비용</th><th>시간</th></tr>
+      <tr><td>Max API 크레딧</td><td>Max 요금에 들어 있어요</td><td>-</td></tr>
+      <tr><td>허브 없이 (계정 1개, 유료 키 없음)</td><td>추가 비용 없음</td><td>약 10분</td></tr>
+      <tr><td>허브 만들기</td><td>Neon 무료. Vercel Hobby는 개인·비상업만, 회사 서비스면 Pro</td><td>약 30~60분</td></tr>
+      <tr><td>유료로 넘어갈 때</td><td>원래 쓰던 유료 키에서 나가요. 한 달 상한을 걸 수 있어요</td><td>-</td></tr>
+      <tr><td>연결 시험</td><td>1센트도 안 되는 요청 한 번(보통 크레딧에서)</td><td>몇 초</td></tr>
+    </table>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>자주 묻는 질문</h2>
+    <details><summary>Claude가 내 카드로 결제하거나 크레딧을 사지는 않나요?</summary><p>안 해요. 크레딧 구매, 카드 등록, 건너뛰기 같은 버튼은 절대 누르지 않도록 되어 있어요. 로그인과 본인 확인도 내가 직접 합니다. 크레딧을 받는 조직(Console 안의 따로 된 지갑)에는 카드를 넣지 않기 때문에, 크레딧이 떨어지면 돈이 나가는 대신 요청이 멈춰요.</p></details>
+    <details><summary>키는 어디에 저장되나요? 다른 데로 보내지지 않나요?</summary><p>내 프로젝트의 <code>.env</code>(나만 읽을 수 있게 잠그고 <code>.gitignore</code>에도 추가), 허브를 쓰면 내 허브 데이터베이스(암호화)와 내 Vercel 설정에만 있어요. CreditFirst를 만든 쪽으로 오는 건 하나도 없습니다. 대신 맡아 주는 서비스가 아니라 전부 내 계정에서 돌아가요.</p></details>
+    <details><summary>왜 직접 붙여 넣는 게 가장 안전한가요?</summary><p>Claude가 화면이나 메시지로 읽은 내용은 Claude Code 대화 기록 파일(<code>~/.claude/projects/…</code>)에 남아요. 내가 직접 붙여 넣으면 키가 그 기록에 들어가지 않습니다.</p></details>
+    <details><summary>Claude Code가 “허락해 주세요”라고 자꾸 물어요.</summary><p>안내서를 읽거나 작은 스크립트를 실행할 때 물어보는 거예요. 허락해 주세요. 이 스크립트들은 키 값을 화면에 보여 주지 않습니다.</p></details>
+    <details><summary>친구들과 크레딧을 모아 쓸 수 있나요?</summary><p>안 됩니다. 내가(또는 우리 회사가) 돈 내고 쓰는 계정만 쓰는 도구예요. 크레딧을 남과 나누거나 API를 되파는 용도, claude.ai 로그인을 API처럼 쓰는 용도는 지원하지 않아요. 자세한 건 <a href="https://github.com/elon-choo/creditfirst/blob/main/docs/TERMS-NOTES.md">약관 메모</a>를 보세요.</p></details>
+    <details><summary>크레딧이 얼마나 남았는지 볼 수 있나요?</summary><p>허브 화면에 추정치가 보여요. 정확한 숫자는 Console의 결제 화면에 있습니다.</p></details>
+    <details><summary>안 되는 것도 있나요?</summary><p>허브는 4.5MB가 넘는 요청(큰 PDF·이미지)을 받지 못하고, 메시지 보내기·토큰 세기·모델 목록만 지원해요. 대량 처리(Batch)와 파일(Files) API는 아직 안 됩니다. 지금은 Vercel + Neon 조합만 지원해요.</p></details>
+  </section>
+
+  <footer>
+    <p>CreditFirst는 MIT 라이선스 오픈소스이고, <b>Anthropic과 관계없는 프로젝트</b>입니다. “Claude”와 “Anthropic”은 Anthropic의 상표입니다.</p>
+    <p><a href="https://github.com/elon-choo/creditfirst">GitHub 저장소</a> · <a href="https://github.com/elon-choo/creditfirst/blob/main/README.ko.md">한국어 README</a> · <a href="https://github.com/elon-choo/creditfirst/blob/main/README.md">English README</a></p>
+  </footer>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.getAttribute('data-copy');
+    var done=function(){b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1500)};
+    if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,function(){})}
+  });
+});
+var ans={};
+document.querySelectorAll('.choice').forEach(function(g){
+  g.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      g.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false')});
+      btn.setAttribute('aria-pressed','true');
+      ans[g.getAttribute('data-q')]=btn.getAttribute('data-v');
+      var a=document.getElementById('resA'),b=document.getElementById('resB');
+      a.classList.remove('show');b.classList.remove('show');
+      if(ans.acct==='many'||ans.paid==='yes'){b.classList.add('show')}
+      else if(ans.acct==='1'&&ans.paid==='no'){a.classList.add('show')}
+    });
+  });
+});
+</script>
+</body>
+</html>
