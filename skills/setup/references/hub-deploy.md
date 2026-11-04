@@ -70,7 +70,7 @@ in their own terminal `cat ~/.config/creditfirst/<hub-name>/HUB_ADMIN_TOKEN` (or
 | English | 한국어 |
 |---|---|
 | Name | 이름 |
-| Kind: "Max plan API credit" or "Paid API (used last)" | 종류: "구독 제공 크레딧" 또는 "유료 API(마지막에 사용)" |
+| Kind: "Max/Ultra plan API credit" or "Paid API (used last)" | 종류: "구독 제공 크레딧" 또는 "유료 API(마지막에 사용)" |
 | Monthly credit (USD) | 월 제공 크레딧(달러) |
 | Renewal day of month | 매달 갱신일(결제일) |
 | API key (from the Console organization connected to that account) | API 키 (그 계정에 연결한 Console 조직에서 만든 키) |

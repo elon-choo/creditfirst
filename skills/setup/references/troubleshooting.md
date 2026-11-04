@@ -4,7 +4,7 @@
 
 | Symptom | Likely cause | What to do |
 |---|---|---|
-| `/create/credits` shows only a purchase form | Max subscription under 7 days old, or a different account is signed in | Click nothing. Check the signed-in account (top-right / Settings). Wait until the evening of day 7 and reload. |
+| `/create/credits` shows only a purchase form | Max/Ultra subscription under 7 days old, or a different account is signed in | Click nothing. Check the signed-in account (top-right / Settings). Wait until the evening of day 7 and reload. |
 | Stuck on "Connecting…" ("연결 중") | The screen often does not advance even on success | Reload, or open `/settings/billing` and look for the credit balance. Do not click the offer twice in a row without checking. |
 | Google login asks for SMS identity check | Google security check | Use "Continue with email" and the magic link, or let the human complete the check. |
 | hCaptcha / verification | Normal | The human solves it. Never try to bypass it. |

@@ -1,6 +1,6 @@
-# Console credit guide (Max credit -> Console org -> API key)
+# Console credit guide (Max/Ultra credit -> Console org -> API key)
 
-Source: what the maintainers saw while linking several Max accounts in October 2026, with a Korean
+Source: what the maintainers saw while linking several Max/Ultra accounts in October 2026, with a Korean
 Console UI. Anthropic changes these screens; **the screen in front of you wins over this file.** Items
 marked **(unverified)** were not observed directly - read the screen and adapt, never guess-click.
 
@@ -8,8 +8,10 @@ English labels below are translations of the Korean labels we saw and are **(unv
 
 ## Before you start
 
-- One Max account at a time. Each Max account gets its own credit org and its own key.
-- Wait until the Max subscription is **at least 7 days old**. Observed: eligibility opened on the evening of
+- Plan name: claude.ai has shown the Max plan as "Ultra" since early November 2026. Same steps; screens
+  observed under the Max name, so labels mentioning "Max" may now say "Ultra" **(unverified on the new name)**.
+- One Max/Ultra account at a time. Each Max/Ultra account gets its own credit org and its own key.
+- Wait until the Max/Ultra subscription is **at least 7 days old**. Observed: eligibility opened on the evening of
   day 7 (not at midnight). Before that, the credit page shows only a purchase form - do not buy, just wait
   and check again later.
 - Amount observed: US$200 on Max 20x; the plan notes say US$100 on Max 5x **(5x amount unverified by us)**.
@@ -18,18 +20,18 @@ English labels below are translations of the Korean labels we saw and are **(unv
 - Login tips observed:
   - "Continue with Google" on the Console sometimes triggered a Google identity check by SMS. "Continue
     with email" + the magic link in that account's inbox avoided it.
-  - Linking appeared to work best when claude.ai in the same browser was signed in to the same Max account
+  - Linking appeared to work best when claude.ai in the same browser was signed in to the same Max/Ultra account
     **(observed once, cause unverified)**.
 
 ## 1. Sign in and create the credit org
 
-1. Open https://platform.claude.com and have the human sign in with the **same account as the Max plan**.
+1. Open https://platform.claude.com and have the human sign in with the **same account as the Max/Ultra plan**.
 2. If the Console asks what kind of organization to create (URL under `/create`), choose
    **Individual** ("개인"). This org becomes the credit org. If the account already has an org with a card
    or a balance, create a new Individual org for the credit instead **(the exact menu for adding a second
    org is unverified)**.
 
-## 2. Link the Max credit
+## 2. Link the Max/Ultra credit
 
 1. Open https://platform.claude.com/create/credits
 2. What you may see:
@@ -53,12 +55,12 @@ the Console offer page existed for us; current availability unverified)**.
 
 Open https://platform.claude.com/settings/billing and ask the human to confirm, out loud:
 
-- [ ] the credit balance shows the Max credit ("크레딧 잔액" / Credit balance)
+- [ ] the credit balance shows the Max/Ultra credit ("크레딧 잔액" / Credit balance)
 - [ ] **no card / payment method** is on this org
 - [ ] **no prepaid balance** they bought
 - [ ] **auto-reload is off**
 
-Why: inside one org, Anthropic uses the Max credit and then whatever paid balance exists. With no card and
+Why: inside one org, Anthropic uses the Max/Ultra credit and then whatever paid balance exists. With no card and
 no balance, the API refuses requests when credit ends instead of charging. The hub cannot see payment
 methods through the API, so this human check is the only guard.
 
@@ -92,7 +94,7 @@ only after the hub is deployed and healthy (SKILL.md Path B), then register it i
 - The paid key must come from a **different** organization than every credit org (for example the org
   they already use for their service, with a card). The hub tests each key, reads the organization id, and
   refuses to register a paid key whose org matches a credit org (and the reverse).
-- Do not add the Max credit to the paid org, and do not add a card to the credit org.
+- Do not add the Max/Ultra credit to the paid org, and do not add a card to the credit org.
 
 ## Checking the balance later
 

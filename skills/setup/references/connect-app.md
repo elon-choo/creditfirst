@@ -118,5 +118,5 @@ Anthropic unverified)**. Show a friendly message or switch to another key yourse
 ## Not covered
 
 - Claude Code itself: do not point your own interactive Claude Code at the hub; it is meant for your apps'
-  API calls. **(Whether the Max API credit may be consumed by Claude Code is unverified; we don't recommend it.)**
+  API calls. **(Whether the Max/Ultra API credit may be consumed by Claude Code is unverified; we don't recommend it.)**
 - Batch and Files APIs, and request bodies over 4.5 MB (Vercel limit) - call Anthropic directly for those.

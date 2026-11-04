@@ -4,16 +4,16 @@ CreditFirst is not affiliated with, endorsed by, or supported by Anthropic. This
 and does not quote Anthropic's terms. **Re-read the current terms yourself before using CreditFirst**, and
 again when Anthropic updates them.
 
-- Anthropic Consumer Terms (apply to Claude.ai / Max plans): https://www.anthropic.com/legal/consumer-terms
+- Anthropic Consumer Terms (apply to Claude.ai / Max/Ultra plans): https://www.anthropic.com/legal/consumer-terms
 - Anthropic Commercial Terms (apply to the API / Console): https://www.anthropic.com/legal/commercial-terms
 - Anthropic Usage Policy: https://www.anthropic.com/legal/aup
-- Any credit or promotion terms shown on the Console when you link the Max credit - read them on screen.
+- Any credit or promotion terms shown on the Console when you link the Max/Ultra credit - read them on screen.
 
 (Links are placeholders we believe are correct as of 2026-11; if one moves, find it from anthropic.com/legal.)
 
 ## How CreditFirst is designed to be used
 
-1. **Your own accounts only.** One installation belongs to one person or one company, using Max accounts
+1. **Your own accounts only.** One installation belongs to one person or one company, using Max/Ultra accounts
    that person or company owns and pays for. Our understanding is that promotional credit is tied to the
    account that received it and is not transferable. CreditFirst therefore has no feature for pooling
    accounts across people, and we do not recommend adding employees' personally paid accounts to a company

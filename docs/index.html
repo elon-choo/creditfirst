@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CreditFirst 사용 가이드</title>
-<meta name="description" content="Claude Max 구독에 들어 있는 API 크레딧을 먼저 쓰고, 모자랄 때만 유료 키를 쓰게 해 주는 Claude Code 플러그인. 설치 두 줄, 말 한마디로 시작합니다.">
+<meta name="description" content="Claude Max/Ultra 구독에 들어 있는 API 크레딧을 먼저 쓰고, 모자랄 때만 유료 키를 쓰게 해 주는 Claude Code 플러그인. 설치 두 줄, 말 한마디로 시작합니다.">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 :root{
@@ -146,10 +146,10 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px;border-top:1px soli
   </header>
 
   <div class="hero">
-    <h1>Max 요금에 이미 들어 있는<br><em>API 크레딧</em>, 그냥 버리고 계셨나요?</h1>
-    <p class="lead">Claude Max를 쓰면 매달 API 크레딧이 같이 나와요. CreditFirst는 이 크레딧으로 API 키를 만들고, 내 앱에 안전하게 넣는 일까지 Claude Code가 대신 해 주게 합니다. 크레딧이 모자랄 때만 원래 쓰던 유료 키로 넘어가요.</p>
+    <h1>Max/Ultra 요금에 이미 들어 있는<br><em>API 크레딧</em>, 그냥 버리고 계셨나요?</h1>
+    <p class="lead">Claude Max(요즘은 Ultra로 표시돼요)를 쓰면 매달 API 크레딧이 같이 나와요. CreditFirst는 이 크레딧으로 API 키를 만들고, 내 앱에 안전하게 넣는 일까지 Claude Code가 대신 해 주게 합니다. 크레딧이 모자랄 때만 원래 쓰던 유료 키로 넘어가요.</p>
     <div class="wallets" aria-label="크레딧을 먼저 쓰고, 모자랄 때만 유료 키를 쓰는 모습">
-      <div class="row"><span class="name" style="color:var(--credit)">① Max 크레딧</span><div class="bar c"><i></i></div></div>
+      <div class="row"><span class="name" style="color:var(--credit)">① Max/Ultra 크레딧</span><div class="bar c"><i></i></div></div>
       <div class="row"><span class="name" style="color:var(--paid)">② 유료 키</span><div class="bar p"><i></i></div></div>
       <small>요청이 오면 크레딧부터 씁니다. 크레딧이 바닥났을 때만 유료 키에서 돈이 나가요.</small>
     </div>
@@ -167,12 +167,12 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px;border-top:1px soli
       </div>
       <div class="step">
         <h3>이렇게 말하세요</h3>
-        <div class="say">“Max 크레딧으로 API 키 만들어줘”</div>
+        <div class="say">“Max/Ultra 크레딧으로 API 키 만들어줘”</div>
         <p>또는 <code>/creditfirst:setup</code>을 입력해도 됩니다.</p>
       </div>
       <div class="step">
         <h3>질문 세 개에 답하세요</h3>
-        <p>Max 계정이 몇 개인지, 이미 돌아가는 서비스가 유료 API 키를 쓰는지, 키를 넣을 프로젝트 폴더가 어디인지 묻습니다. 그다음은 Claude가 한 단계씩 같이 갑니다.</p>
+        <p>Max/Ultra 계정이 몇 개인지, 이미 돌아가는 서비스가 유료 API 키를 쓰는지, 키를 넣을 프로젝트 폴더가 어디인지 묻습니다. 그다음은 Claude가 한 단계씩 같이 갑니다.</p>
       </div>
     </div>
   </section>
@@ -181,7 +181,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px;border-top:1px soli
     <h2>나는 어느 쪽일까요?</h2>
     <p class="sub">두 가지만 눌러 보세요. 무엇이 만들어지는지, 얼마나 걸리는지 바로 보여 드려요.</p>
     <div class="chooser">
-      <div class="q"><b>내가(또는 우리 회사가) 돈 내고 쓰는 Max 계정은?</b>
+      <div class="q"><b>내가(또는 우리 회사가) 돈 내고 쓰는 Max/Ultra 계정은?</b>
         <div class="choice" data-q="acct"><button type="button" aria-pressed="false" data-v="1">1개</button><button type="button" aria-pressed="false" data-v="many">여러 개</button></div>
       </div>
       <div class="q"><b>이미 배포한 서비스가 유료 Claude API 키를 쓰고 있나요?</b>
@@ -189,17 +189,17 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px;border-top:1px soli
       </div>
       <div class="result a" id="resA" role="status">
         <h3>허브 없이 끝나요 · 약 10분 · 추가 비용 없음</h3>
-        <p>Max 크레딧으로 만든 키를 내 프로젝트의 <code>.env</code> 파일에 넣으면 끝입니다.</p>
+        <p>Max/Ultra 크레딧으로 만든 키를 내 프로젝트의 <code>.env</code> 파일에 넣으면 끝입니다.</p>
         <ul>
           <li>크레딧이 떨어지면 돈이 나가지 않고 요청이 멈춰요. 다음 달 크레딧이 들어오면 다시 됩니다.</li>
-          <li>준비물: Claude Code, Node 20 이상, 가입 7일이 지난 Max 구독</li>
+          <li>준비물: Claude Code, Node 20 이상, 가입 7일이 지난 Max/Ultra 구독</li>
         </ul>
       </div>
       <div class="result b" id="resB" role="status">
         <h3>나만의 허브를 만들어요 · 약 30~60분</h3>
         <p>내 Vercel에 작은 중계 서버(허브)를 띄웁니다. 앱은 허브 주소 하나만 바라보고, 허브가 알아서 순서를 정해요.</p>
         <ul>
-          <li>Max 크레딧부터 씁니다. 계정이 여러 개면 크레딧이 곧 초기화되는 계정부터 써요.</li>
+          <li>Max/Ultra 크레딧부터 씁니다. 계정이 여러 개면 크레딧이 곧 초기화되는 계정부터 써요.</li>
           <li>크레딧이 모자랄 때만 유료 키로 넘어갑니다. 한 달 상한(<code>HUB_PAID_MONTHLY_CAP_USD</code>)을 걸어 두길 권해요.</li>
           <li>절대 유료로 넘어가면 안 되는 앱은 “크레딧 전용” 키를 받을 수 있어요.</li>
           <li>준비물: 위의 것 + Vercel 계정, 무료 Neon 데이터베이스(설치 중에 만들어 드려요)</li>
@@ -233,8 +233,8 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px;border-top:1px soli
     <h2>실제 대화는 이런 느낌이에요</h2>
     <p class="sub">말투와 순서는 상황에 따라 조금씩 다를 수 있어요.</p>
     <div class="chat">
-      <div class="msg me"><span class="who">나</span>Max 크레딧으로 API 키 만들어줘</div>
-      <div class="msg ai"><span class="who">Claude</span>좋아요. 세 가지만 여쭤볼게요. ① Max 계정이 몇 개인가요? ② 이미 배포한 서비스가 유료 API 키를 쓰나요? ③ 키를 쓸 프로젝트 폴더는 어디인가요?</div>
+      <div class="msg me"><span class="who">나</span>Max/Ultra 크레딧으로 API 키 만들어줘</div>
+      <div class="msg ai"><span class="who">Claude</span>좋아요. 세 가지만 여쭤볼게요. ① Max/Ultra 계정이 몇 개인가요? ② 이미 배포한 서비스가 유료 API 키를 쓰나요? ③ 키를 쓸 프로젝트 폴더는 어디인가요?</div>
       <div class="msg me"><span class="who">나</span>1개, 아니요, ~/my-app</div>
       <div class="msg ai"><span class="who">Claude</span>그럼 허브 없이 10분이면 끝나요. Console(API 키를 관리하는 Anthropic 사이트)에 로그인해 주시면, 크레딧을 받는 화면까지 같이 갈게요. 구매나 카드 등록 버튼은 절대 누르지 않아요.</div>
       <div class="msg ai"><span class="who">Claude</span>키를 만들기 전에 받는 방법을 골라 주세요. 1번 직접 붙여 넣기(가장 안전), 2번 복사만 하고 저에게 맡기기, 3번 제가 직접 읽기(대화 기록에 남아요).</div>
@@ -249,7 +249,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px;border-top:1px soli
     <ul class="check">
       <li>Claude Code<small>이 가이드의 주인공이에요.</small></li>
       <li>Node 20 이상<small>터미널에서 <code>node --version</code>으로 확인. 없으면 nodejs.org에서 설치.</small></li>
-      <li>가입한 지 7일이 지난 Claude Max 구독<small>7일이 지나야 Console에 API 크레딧 받기 버튼이 나와요.</small></li>
+      <li>가입한 지 7일이 지난 Claude Max/Ultra 구독<small>7일이 지나야 Console에 API 크레딧 받기 버튼이 나와요.</small></li>
       <li><span class="only">허브를 만들 때만</span> Vercel 계정<small><code>npm i -g vercel</code>로 설치하고 <code>vercel login</code>으로 로그인.</small></li>
       <li><span class="only">허브를 만들 때만</span> Neon 데이터베이스(무료)<small>설치 스크립트가 Vercel 연동으로 만들어 주거나, 주소를 복사해 넣으면 돼요.</small></li>
     </ul>
@@ -260,7 +260,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px;border-top:1px soli
     <div class="tablewrap">
     <table>
       <tr><th></th><th>비용</th><th>시간</th></tr>
-      <tr><td>Max API 크레딧</td><td>Max 요금에 들어 있어요</td><td>-</td></tr>
+      <tr><td>Max/Ultra API 크레딧</td><td>Max/Ultra 요금에 들어 있어요</td><td>-</td></tr>
       <tr><td>허브 없이 (계정 1개, 유료 키 없음)</td><td>추가 비용 없음</td><td>약 10분</td></tr>
       <tr><td>허브 만들기</td><td>Neon 무료. Vercel Hobby는 개인·비상업만, 회사 서비스면 Pro</td><td>약 30~60분</td></tr>
       <tr><td>유료로 넘어갈 때</td><td>원래 쓰던 유료 키에서 나가요. 한 달 상한을 걸 수 있어요</td><td>-</td></tr>
@@ -271,6 +271,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:14px;border-top:1px soli
 
   <section id="faq">
     <h2>자주 묻는 질문</h2>
+    <details><summary>제 요금제는 Max가 아니라 Ultra로 나와요. 써도 되나요?</summary><p>네. 2026년 11월 초부터 claude.ai에서 Max 요금제가 Ultra로 표시돼요. CreditFirst는 둘을 같은 요금제로 다룹니다. “Ultra 크레딧으로 API 키 만들어줘”라고 말해도 똑같이 시작돼요.</p></details>
     <details><summary>Claude가 내 카드로 결제하거나 크레딧을 사지는 않나요?</summary><p>안 해요. 크레딧 구매, 카드 등록, 건너뛰기 같은 버튼은 절대 누르지 않도록 되어 있어요. 로그인과 본인 확인도 내가 직접 합니다. 크레딧을 받는 조직(Console 안의 따로 된 지갑)에는 카드를 넣지 않기 때문에, 크레딧이 떨어지면 돈이 나가는 대신 요청이 멈춰요.</p></details>
     <details><summary>키는 어디에 저장되나요? 다른 데로 보내지지 않나요?</summary><p>내 프로젝트의 <code>.env</code>(나만 읽을 수 있게 잠그고 <code>.gitignore</code>에도 추가), 허브를 쓰면 내 허브 데이터베이스(암호화)와 내 Vercel 설정에만 있어요. CreditFirst를 만든 쪽으로 오는 건 하나도 없습니다. 대신 맡아 주는 서비스가 아니라 전부 내 계정에서 돌아가요.</p></details>
     <details><summary>왜 직접 붙여 넣는 게 가장 안전한가요?</summary><p>Claude가 화면이나 메시지로 읽은 내용은 Claude Code 대화 기록 파일(<code>~/.claude/projects/…</code>)에 남아요. 내가 직접 붙여 넣으면 키가 그 기록에 들어가지 않습니다.</p></details>

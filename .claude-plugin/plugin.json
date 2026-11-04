@@ -1,8 +1,8 @@
 {
   "name": "creditfirst",
-  "displayName": "CreditFirst - Max credit first, paid key second",
+  "displayName": "CreditFirst - Max/Ultra credit first, paid key second",
   "version": "0.1.0",
-  "description": "Set up API keys from your own Claude Max plan's monthly API credit, hand keys over without exposing them in the conversation, and optionally deploy your own hub that uses credit accounts first (nearest renewal first) and your paid key only when credit is short. Not affiliated with Anthropic.",
+  "description": "Set up API keys from your own Claude Max/Ultra plan's monthly API credit, hand keys over without exposing them in the conversation, and optionally deploy your own hub that uses credit accounts first (nearest renewal first) and your paid key only when credit is short. Not affiliated with Anthropic.",
   "author": {
     "name": "CreditFirst contributors"
   },

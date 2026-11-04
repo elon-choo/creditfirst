@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Claude Max plans include a monthly API credit that can be used in the Claude Console (platform.claude.com) to create real Anthropic API keys. This skill walks the user through linking that credit, creating the key, putting it into .env without exposing it, and - with several Max accounts or a paid service key - deploying their own hub that spends credit first and the paid key only when credit is short. Use whenever someone wants an API key from a Max plan or asks about Max API credit, e.g. "/creditfirst:setup", "Max 크레딧으로 API 키 만들어줘", "API 키 만들기", "클로드 API 키 발급", "Max 구독 API 크레딧", "맥스 플랜으로 API 쓰기", "크레딧 허브 만들어줘", "API 키 받아서 .env에 넣어줘", "Anthropic API key from Max plan", "use my Max credit for my app", "set up my Claude API credits", or adding an account/app to a CreditFirst hub.
+description: Claude Max plans (shown as "Ultra" on claude.ai since early November 2026) include a monthly API credit that can be used in the Claude Console (platform.claude.com) to create real Anthropic API keys. This skill walks the user through linking that credit, creating the key, putting it into .env without exposing it, and - with several Max/Ultra accounts or a paid service key - deploying their own hub that spends credit first and the paid key only when credit is short. Use whenever someone wants an API key from a Max or Ultra plan or asks about Max/Ultra API credit, e.g. "/creditfirst:setup", "Max 크레딧으로 API 키 만들어줘", "Ultra 크레딧으로 API 키 만들어줘", "울트라 크레딧으로 API 키 만들어줘", "API 키 만들기", "클로드 API 키 발급", "Max 구독 API 크레딧", "맥스 플랜으로 API 쓰기", "울트라 플랜으로 API 쓰기", "Ultra 구독 API 크레딧", "크레딧 허브 만들어줘", "API 키 받아서 .env에 넣어줘", "Anthropic API key from Max plan", "API key from my Ultra plan", "use my Max or Ultra credit for my app", "set up my Claude API credits", or adding an account/app to a CreditFirst hub.
 ---
 
 # CreditFirst setup
@@ -37,34 +37,36 @@ filled in, say exactly what (e.g. "replace `my-hub` with the hub name you chose"
 
 ## Step 1 - Questions, then the decision
 
-Ask together: (1) "How many Claude Max accounts do you (or your company) own and pay for? 1 / several"
+Ask together: (1) "How many Claude Max/Ultra accounts do you (or your company) own and pay for? 1 / several"
 (2) "Does a deployed app already use a paid Claude API key? yes / no" (3) "Which project folder should use the key?"
 
-Max plans include a monthly API credit for the Console (observed: US$100 on Max 5x, US$200 on Max 20x; the
+Name: claude.ai has shown the Max plan as **"Ultra"** since early November 2026. Treat Max and Ultra as the same
+plan for CreditFirst and use whichever word the user uses; tier names below (5x/20x) are the ones we observed
+under the Max name. Max/Ultra plans include a monthly API credit for the Console (observed: US$100 on Max 5x, US$200 on Max 20x; the
 screen is the truth). It pays only for API calls and expires each cycle. Explain at first use:
 **Console** = Anthropic's site for API keys and API billing (platform.claude.com - not claude.ai).
 **Organization (조직)** = a separate wallet inside the Console; the credit goes into its own wallet with no
 card, so when it runs out requests stop instead of charging.
 
-| Max accounts | Paid service key | Path |
+| Max/Ultra accounts | Paid service key | Path |
 |---|---|---|
 | 1 | no | **A - no hub**: credit key into the project's `.env`. About 10 minutes. |
 | several, or any | any, or yes | **B - own hub**: credit first (nearest renewal first), paid key only when credit is short. About 30-60 minutes. |
 
-Costs, said honestly: the credit itself is part of Max (no extra cost). Path A costs nothing more. Path B
+Costs, said honestly: the credit itself is part of Max/Ultra (no extra cost). Path A costs nothing more. Path B
 needs a free Neon Postgres ($0 on the Free plan) and Vercel: the Hobby plan is free but for personal,
 non-commercial use - a hub serving a business/commercial service needs Vercel Pro (see
 https://vercel.com/pricing and check the current terms). Paid fallback spends the user's existing paid
 key's money; suggest a monthly cap (`HUB_PAID_MONTHLY_CAP_USD`, Path B step B6).
 
-## Step 2 - Link the Max credit (once per Max account)
+## Step 2 - Link the Max/Ultra credit (once per Max/Ultra account)
 
 Guide with exact screens: `references/console-credit-guide.md`. Essentials (Korean labels as observed;
 English labels **unverified**):
 
-1. The Max subscription must be at least 7 days old (it opened on the evening of day 7 for us). Before
+1. The Max/Ultra subscription must be at least 7 days old (it opened on the evening of day 7 for us). Before
    that `/create/credits` shows only a purchase form: click nothing, wait.
-2. The human signs in to https://platform.claude.com with the same account as the Max plan.
+2. The human signs in to https://platform.claude.com with the same account as the Max/Ultra plan.
 3. If asked to create an organization, choose "개인" (Individual). This is the credit org.
 4. Open https://platform.claude.com/create/credits → "연결하고 US$200 받기" ("Link and get US$200"; amount
    follows the plan) → "카드 없이 계속하기" ("Continue without card"). If it stays on "연결 중"
@@ -121,7 +123,7 @@ shown once. Then run the handoff they chose.
 
 Details: `references/hub-deploy.md`.
 
-- **B1 Link credit on every account first:** Step 2 for each Max account. Do **not** create keys yet.
+- **B1 Link credit on every account first:** Step 2 for each Max/Ultra account. Do **not** create keys yet.
 - **B2 Prerequisites:** `node --version` (20+), `npm --version`. Vercel CLI: if `vercel --version` fails,
   the human runs `npm i -g vercel`; then `vercel whoami` (if not logged in, the human runs `vercel login`
   in their terminal; in Claude Code they can type `! vercel login`). Database: the easiest is Vercel's Neon
@@ -139,7 +141,7 @@ Details: `references/hub-deploy.md`.
     human opens it themselves, not you: in their own terminal (outside Claude Code)
     `cat ~/.config/creditfirst/<hub>/HUB_ADMIN_TOKEN` or `pbcopy < ~/.config/creditfirst/<hub>/HUB_ADMIN_TOKEN`
     (macOS), or `open ~/.config/creditfirst/<hub>` and open the file in a text editor. Form
-    "Register an account" / "계정 등록": Name / 이름, Kind / 종류 = "Max plan API credit" / "구독 제공 크레딧",
+    "Register an account" / "계정 등록": Name / 이름, Kind / 종류 = "Max/Ultra plan API credit" / "구독 제공 크레딧",
     Monthly credit (USD) / 월 제공 크레딧(달러), Renewal day of month / 매달 갱신일(결제일), API key / API 키 →
     "Register" / "등록". Then confirm with `hub-admin.mjs status`.
   - Option 2: `node "$CF/scripts/put-key.mjs" hub --hub <hub> --kind credit --label "Max 20x (me)" --monthly-credit 200 --renewal-day 19 --clear-clipboard`

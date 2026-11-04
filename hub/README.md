@@ -1,7 +1,7 @@
 # CreditFirst hub
 
 A small Next.js app you deploy to **your own** Vercel account, with your own Postgres (Neon). Your apps call it
-instead of `api.anthropic.com`. For every request it uses the API credit that comes with your Claude Max plans
+instead of `api.anthropic.com`. For every request it uses the API credit that comes with your Claude Max/Ultra plans
 first (the account whose credit renews soonest goes first, because unused credit expires), and uses your paid
 Anthropic API key only when the credit cannot take the request.
 
@@ -23,7 +23,7 @@ Deploy it with `node scripts/hub-deploy.mjs --name <hub-name>` from the repo roo
 
 ### Why the credit organization must have no card
 
-Each Max account's API credit lands in a Console organization. If that organization has **no card, no prepaid
+Each Max/Ultra account's API credit lands in a Console organization. If that organization has **no card, no prepaid
 balance and no auto-reload**, Anthropic refuses requests when the credit is gone instead of charging you. That
 refusal is the last safety net behind the hub's own accounting. If a card were attached, a miscount or usage
 outside the hub would turn into real charges on an account the hub treats as free.
@@ -45,7 +45,7 @@ including a deleted account of the other kind) it answers **409**.
 | `HUB_ADMIN_TOKEN` | yes | At least 24 characters. Admin API bearer token and `/admin` password. |
 | `CRON_SECRET` | yes | At least 16 characters. Vercel Cron sends it to `/api/cron/report`. |
 | `HUB_VIEWER_TOKEN` | no | At least 16 characters. A read-only `/admin` password. |
-| `HUB_TIMEZONE` | no | IANA zone (default `UTC`) for billing days, calendar months and shown times. Set it to where your Max plans are billed, e.g. `Asia/Seoul`, `America/Los_Angeles`. |
+| `HUB_TIMEZONE` | no | IANA zone (default `UTC`) for billing days, calendar months and shown times. Set it to where your Max/Ultra plans are billed, e.g. `Asia/Seoul`, `America/Los_Angeles`. |
 | `HUB_LANG` | no | `en` (default) or `ko`: admin page, alerts, daily report. |
 | `HUB_NAME` | no | Display name (default `CreditFirst`). |
 | `HUB_PAID_MONTHLY_CAP_USD` | no | Most the paid keys may spend per calendar month (in `HUB_TIMEZONE`). Unset = no cap. An unreadable value blocks paid use. With a cap, the paid key only takes requests whose cost can be bounded (see `paid-cap-unbounded`). |

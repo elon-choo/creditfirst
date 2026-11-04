@@ -95,7 +95,7 @@ const en = {
   viewerNote: 'Read-only view. Log in with the admin password to change accounts or keys.',
   headline: (credit: string, paid: string, cap: string) => `Credit left now ${credit} · paid this month ${paid}${cap}`,
   capPart: (cap: string) => ` / cap ${cap}`,
-  creditHeader: 'Max plan API credit (nearest renewal first)',
+  creditHeader: 'Max/Ultra plan API credit (nearest renewal first)',
   noAccounts: 'No accounts yet. Add one under "Register an account" below.',
   paidHeader: 'Paid API (only after the credit)',
   noPaid: 'No paid key. When credit runs out, requests fail.',
@@ -108,7 +108,7 @@ const en = {
   creditOnlyTag: 'credit only', blockedTag: 'blocked',
   toCreditOnly: 'Make credit only', allowPaid: 'Allow paid fallback', block: 'Block', unblock: 'Allow again',
   registerHeader: 'Register an account',
-  step1: 'Sign in to claude.ai with the Max account → Settings → Billing → API credits, and connect a NEW Console organization used only by that account. One organization per account.',
+  step1: 'Sign in to claude.ai with the Max/Ultra account → Settings → Billing → API credits, and connect a NEW Console organization used only by that account. One organization per account.',
   step2: 'In that organization on platform.claude.com → Billing, do NOT add a card or prepaid credit and keep auto-reload off. Then, when the credit runs out, Anthropic refuses instead of charging, and the hub moves on.',
   step3: 'Create an API key in that organization, paste it below, and enter the monthly credit and the billing day of the month.',
   connectHint: (host: string) => `In your app, set the base URL to https://${host} and the API key to a project key created above.`,
@@ -122,7 +122,7 @@ const en = {
   edit: 'Save', disable: 'Turn off', enable: 'Turn on', reset: 'Reset state', del: 'Delete',
   // forms
   fName: 'Name', fNamePh: 'e.g. My Max 20x',
-  fKind: 'Kind', fKindCredit: 'Max plan API credit', fKindPaid: 'Paid API (used last)',
+  fKind: 'Kind', fKindCredit: 'Max/Ultra plan API credit', fKindPaid: 'Paid API (used last)',
   fCredit: 'Monthly credit (USD)', fDay: 'Renewal day of month', fDayPh: 'e.g. 14',
   fKey: 'API key (from the Console organization connected to that account)',
   checking: 'Checking key…', register: 'Register',
@@ -130,7 +130,7 @@ const en = {
   fCreditOnly: 'Credit only (when there is no credit, answer 402 instead of using the paid key, so the app can use its own paid route)',
   keyOnce: (name: string) => `Key for "${name}". It will not be shown again after you leave this page.`,
   makeKey: 'Create key',
-  metaDescription: 'Self-hosted Claude API hub: Max plan credit first, paid key last',
+  metaDescription: 'Self-hosted Claude API hub: Max/Ultra plan credit first, paid key last',
 };
 
 export type Dict = typeof en;
@@ -231,7 +231,7 @@ const ko: Dict = {
   creditOnlyTag: '크레딧 전용', blockedTag: '막힘',
   toCreditOnly: '크레딧 전용으로', allowPaid: '유료 넘김 허용', block: '막기', unblock: '다시 허용',
   registerHeader: '계정 등록',
-  step1: 'Max 계정으로 claude.ai에 들어가 설정 → 결제(Billing) → API credits에서 그 계정만 쓰는 새 Console 조직을 연결합니다. 조직 하나에는 계정 하나만 연결됩니다.',
+  step1: 'Max/Ultra 계정으로 claude.ai에 들어가 설정 → 결제(Billing) → API credits에서 그 계정만 쓰는 새 Console 조직을 연결합니다. 조직 하나에는 계정 하나만 연결됩니다.',
   step2: '그 조직의 platform.claude.com → Billing에 유료 크레딧을 충전하지 말고 자동 충전도 꺼 둡니다. 그러면 제공 크레딧이 떨어졌을 때 돈이 나가지 않고 요청이 멈추며, 허브가 다음 계정으로 넘깁니다.',
   step3: '그 조직에서 API 키를 만들어 아래에 붙여 넣고, 월 크레딧(Max 20x는 200, 5x는 100)과 매달 결제일을 적습니다.',
   connectHint: (host) => `프로젝트에서는 주소를 https://${host}, 키를 위에서 만든 프로젝트 키로 바꾸면 됩니다.`,
@@ -252,7 +252,7 @@ const ko: Dict = {
   fCreditOnly: '크레딧 전용 (크레딧이 없으면 유료 키 대신 402로 답해, 앱이 자기 유료 경로로 넘어가게 함)',
   keyOnce: (name) => `「${name}」 키입니다. 이 화면을 벗어나면 다시 볼 수 없습니다.`,
   makeKey: '키 만들기',
-  metaDescription: 'Max 크레딧을 먼저, 유료 키는 마지막에 쓰는 자체 호스팅 Claude API 허브',
+  metaDescription: 'Max/Ultra 크레딧을 먼저, 유료 키는 마지막에 쓰는 자체 호스팅 Claude API 허브',
 };
 
 const dicts: Record<Lang, Dict> = { en, ko };

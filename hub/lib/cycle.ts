@@ -2,7 +2,7 @@
  * Billing-cycle dates, in the hub's time zone (HUB_TIMEZONE, an IANA zone such as
  * "Asia/Seoul" or "America/Los_Angeles"; default UTC).
  *
- * Each Max plan refreshes its API credit on the plan's billing day, and unused
+ * Each Max/Ultra plan refreshes its API credit on the plan's billing day, and unused
  * credit expires at that moment. The hub stores the billing day (1–31) per
  * account; the cycle runs from the latest billing day up to the next one.
  * Months shorter than the billing day use their last day. Days begin at local

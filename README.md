@@ -1,19 +1,21 @@
 # CreditFirst
 
-**Use the API credit that comes with your own Claude Max plan first. Your paid API key only when credit runs short.**
+**Use the API credit that comes with your own Claude Max/Ultra plan first. Your paid API key only when credit runs short.**
 
-- A Claude Code plugin: say "set up my Max API credit" and Claude walks you through the Console, creates the key, and puts it in your app safely.
-- With several Max accounts or a paid service key, it deploys **your own** small hub (your Vercel, your database) that spends credit first, nearest renewal first.
+- A Claude Code plugin: say "set up my Max/Ultra API credit" and Claude walks you through the Console, creates the key, and puts it in your app safely.
+- With several Max/Ultra accounts or a paid service key, it deploys **your own** small hub (your Vercel, your database) that spends credit first, nearest renewal first.
 - Open source (MIT). **Not affiliated with Anthropic.**
 
 [한국어 README](README.ko.md)
 
 **Easy guide (Korean): https://elon-choo.github.io/creditfirst/**
 
+> Since early November 2026 claude.ai shows the Max plan as **Ultra**. CreditFirst treats them as the same plan; say either word.
+
 ## Who it is for
 
-- You pay for a Claude Max plan and want its monthly API credit to power your own scripts or apps.
-- You (or your company) own several Max accounts and want one endpoint that uses them in the right order.
+- You pay for a Claude Max/Ultra plan and want its monthly API credit to power your own scripts or apps.
+- You (or your company) own several Max/Ultra accounts and want one endpoint that uses them in the right order.
 - You run a service on a paid Anthropic API key and want credit to be used before paid money.
 
 Not for: pooling credit with other people, selling API access, or using claude.ai logins as an API. See [Terms notes](docs/TERMS-NOTES.md).
@@ -29,7 +31,7 @@ Not for: pooling credit with other people, selling API access, or using claude.a
 
 - Claude Code.
 - Node 20 or newer - check with `node --version` (install from https://nodejs.org if missing).
-- A Claude Max plan that is at least 7 days old (the API credit offer appears after 7 days).
+- A Claude Max/Ultra plan that is at least 7 days old (the API credit offer appears after 7 days).
 - Hub path only (several accounts, or a paid service key):
   - a Vercel account, the CLI (`npm i -g vercel`), and `vercel login`;
   - a free Neon Postgres - `hub-deploy` can add it through Vercel's Neon integration, or you paste a Neon
@@ -39,7 +41,7 @@ Not for: pooling credit with other people, selling API access, or using claude.a
 
 | | Cost | Time |
 |---|---|---|
-| Max API credit | Included in your Max plan | - |
+| Max/Ultra API credit | Included in your Max/Ultra plan | - |
 | No-hub setup (1 account, no paid key) | Nothing extra | ~10 min |
 | Hub setup | Neon Free: $0. Vercel Hobby is free **for personal, non-commercial use only**; a hub serving a business or commercial service needs Vercel Pro - see https://vercel.com/pricing and check the current terms. | ~30-60 min |
 | Paid fallback | Spends your existing paid key's money when credit is short. Set a monthly cap with `HUB_PAID_MONTHLY_CAP_USD`. | - |
@@ -49,15 +51,15 @@ Not for: pooling credit with other people, selling API access, or using claude.a
 
 Say to Claude Code, in any language:
 
-> Set up my Max credit API key
+> Set up my Max/Ultra credit API key
 
-(or `Max 크레딧으로 API 키 만들어줘`, or run `/creditfirst:setup`). Claude asks two questions - how many Max accounts you own, and whether a deployed service already uses a paid API key - then guides you step by step (it also asks which project folder should use the key). You do the logins; Claude never clicks purchase, add-card, or skip buttons. With a browser tool (e.g. Claude in Chrome) Claude can open the Console pages with you; without one it tells you each address and button name.
+(or `Max/Ultra 크레딧으로 API 키 만들어줘`, or run `/creditfirst:setup`). Claude asks two questions - how many Max/Ultra accounts you own, and whether a deployed service already uses a paid API key - then guides you step by step (it also asks which project folder should use the key). You do the logins; Claude never clicks purchase, add-card, or skip buttons. With a browser tool (e.g. Claude in Chrome) Claude can open the Console pages with you; without one it tells you each address and button name.
 
 Claude Code may ask permission to read the plugin's guides and run its small scripts. Please allow them; the scripts never show your key.
 
 ## What gets built
 
-| Max accounts | Paid service key | Result |
+| Max/Ultra accounts | Paid service key | Result |
 |---|---|---|
 | 1 | no | (~10 min) No hub. The credit key goes into your project's `.env`. When credit ends, the API refuses (no card on that org) until it renews. |
 | several | any | (~30-60 min) Your own hub: credit accounts first (nearest renewal first), paid key only when credit is short. |
